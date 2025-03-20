@@ -5,3 +5,8 @@ export type Article = {
     articleContent: string[],
     articleImages: string[]
 }
+
+export type Titles = {
+    title: string, 
+    slug: string
+}

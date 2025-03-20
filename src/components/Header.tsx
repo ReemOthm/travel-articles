@@ -1,6 +1,10 @@
 import Link from "next/link";
+import Search from "./Search";
 
-const Header = ()=>{
+const Header = async()=> {
+
+    const titles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/titles`).then(res=> res.json())
+
     return (
         <header>
             <span className="block text-center text-3xl my-3">Travel Articles</span>
@@ -8,17 +12,11 @@ const Header = ()=>{
                 <ul className='flex'>
                     <li><Link href={"/"} className="flex justify-center md:text-lg p-2 hover:bg-[#f7ecb9]">Home</Link></li>
                     <li><Link href={"/about"} className="flex justify-center md:text-lg p-2 hover:bg-[#f7ecb2]">About</Link></li>
-                    <li><Link href={""} className="flex justify-center md:text-lg p-2 hover:bg-[#f7ecb2]">Post Article</Link></li>
+                    <li><Link href={"/post"} className="flex justify-center md:text-lg p-2 hover:bg-[#f7ecb2]">Post Article</Link></li>
                     <li><a href="#contact" className="flex justify-center md:text-lg p-2 hover:bg-[#f7ecb2]">Contact</a></li>
                 </ul>
                 <div>
-                    <div className="flex items-center">
-                        <input type="search" name="search" placeholder="search for article" 
-                            className="outline-none border border-[#ccc] py-1 pl-4 md:w-72 rounded-md"
-                        />
-                    </div>
-                    <ul className="">
-                    </ul>
+                    <Search titles={titles} />
                 </div>
             </nav>
         </header>

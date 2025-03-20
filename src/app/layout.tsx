@@ -27,7 +27,7 @@ export default function RootLayout({
         {children}
         <footer className='bg-[#222] text-center text-white p-[10] '>
           <p className="m-0">&copy; All right reserved {date.getFullYear()}</p>
-          <p className="m-0" id="contact">@travilly</p>
+          <p className="m-0" id="contact">@travel</p>
         </footer> 
       </body>
     </html>

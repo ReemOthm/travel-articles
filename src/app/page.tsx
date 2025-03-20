@@ -1,6 +1,7 @@
 import ArticleContainer from '@/components/ArticleContainer';
 import { Article } from '@/types';
 import { Open_Sans } from 'next/font/google'
+import { Suspense } from 'react';
 
 const open_sans = Open_Sans({ 
   subsets: ['latin'],
@@ -11,7 +12,7 @@ const open_sans = Open_Sans({
 
 export default async function Home() {
   
-  const res = await fetch('http://localhost:3000/api')
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api`)
   const articles:Article[] = await res.json() 
 
   // ----------------Rendere---------------
@@ -30,13 +31,18 @@ export default async function Home() {
       <span className={`block text-4xl font-sans w-fit bg-[#f7ecb9] m-4 py-2 px-2 -skew-x-12 -rotate-3 ${open_sans.className}`}>What&apos;s New!</span>
       <div className="flex gap-2 flex-col-reverse px-3 md:flex-row mb-5 md:items-start md:justify-center">
         <div className='md:w-1/2'>
-          { articles.length > 0 && renderArticles } 
+            <Suspense fallback={Array.from({length: 4}).map((arr, index)=> <div key={index} className="bg-[#cccccc7a] p-1 rounded-md mb-5 h-56"></div> )}
+            >
+              { articles.length > 0 && renderArticles }
+            </Suspense>
         </div>
 
         <aside className='p-4 rounded-md text-center bg-[#e9ebec]'>
           <h3 className='pb-2 font-bold text-xl'>Common Articles:</h3>
           <ul>
-            {renderArticleList}
+              <Suspense fallback={ Array.from({length: 4}).map((arr, index)=> <li key={index} className="bg-[#fff] p-3 rounded-md mb-5"></li> ) }>
+                {renderArticleList}
+              </Suspense>
           </ul>
         </aside> 
       </div>
