@@ -1,9 +1,16 @@
 import Link from "next/link";
 import Search from "./Search";
+import { Titles } from "@/types";
 
 const Header = async()=> {
 
-    const titles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/titles`).then(res=> res.json())
+    let titles:Titles[] = []
+    try{
+        titles = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/titles`).then(res=> res.json())
+        if(!titles) titles = []
+    }catch(error){
+        console.log(error)
+    }
 
     return (
         <header>

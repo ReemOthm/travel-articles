@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { Titles } from "@/types";
 import Link from "next/link";

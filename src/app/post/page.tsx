@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { redirect } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
@@ -32,20 +32,26 @@ const post = ()=>{
             articleContent: content.current?.value.split("\n\n"),
             articleImages: imageFile
         }
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/`, {
+        
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/`, {
             method: "POST",
             headers: {
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify(post)
         })
-        redirect('/')
+        console.log(response.status)
+        if(response.status == 200) {
+            redirect('/') 
+        }
     }
 
     return (
         <div className="pb-8 md:w-1/2 md:m-auto min-h-[78vh] mx-3">
             <h2 className="text-2xl md:text-2xl font-bold text-[#222] text-center px-1 py-2 capitalize">Write An Article</h2>
-            <form className="bg-[#cccccc7a] p-3 rounded-md mb-5" onSubmit={handleSubmit}>
+            <form className="bg-[#cccccc7a] p-3 rounded-md mb-5" 
+                onSubmit={handleSubmit}
+            >
                 <input 
                     type="text"
                     ref={title}
