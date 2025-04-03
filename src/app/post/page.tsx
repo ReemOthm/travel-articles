@@ -56,7 +56,7 @@ const post = ()=>{
                     type="text"
                     ref={title}
                     placeholder="type an article name" 
-                    className="block my-0 mx-1 p-2 w-[40%] border rounded-md outline-none"
+                    className="block my-0 mx-1 p-2 w-[50%] border rounded-md outline-none"
                 />
                 { titleError && <p className="text-red-500 px-3">{titleError}</p>}
                 <div className="leading-5 bg-[#f9f9f9] px-7 py-5 rounded-md mt-3">

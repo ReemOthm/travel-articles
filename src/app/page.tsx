@@ -12,14 +12,8 @@ const open_sans = Open_Sans({
 
 export default async function Home() {
 
-  let articles:Article[];
-  
-  try{
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api`)
-    articles = await res.json() 
-  }catch(error){
-    articles = []
-  }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api`, {cache: "no-store"})
+  const articles:Article[] = await res.json() 
 
   // ----------------Rendere---------------
   const renderArticleList = articles.map(article => <li 
